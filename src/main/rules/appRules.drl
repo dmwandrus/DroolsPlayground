@@ -1,0 +1,44 @@
+//created on: Aug 28, 2012
+package com.sample
+
+//list any import classes here.
+import com.sample.dtos.App;
+import com.sample.dtos.MessageTypes;
+import com.sample.dtos.MessageRegistration;
+import java.util.Date;
+
+
+//declare any global variables here
+
+
+
+
+rule "App Added Audit"
+	salience 50
+    when
+        //conditions
+        $app : App(  )
+    then
+        //actions
+		System.out.println("[audit] Added App "+ $app.getName() + " at "+new Date());
+end
+
+rule "App Added Processing"
+	salience 20
+	when
+		$app : App(  )
+		$type : MessageTypes ( ) from $app.getMyRegisteredTypes()
+	then
+		// for each message type,
+		insert (new MessageRegistration( $app, $type ) );
+		System.out.println("Added Message registration for App: "+$app.getName()+" and type: "+$type);
+end
+
+rule "Your Second Rule"
+    //include attributes such as "salience" here...
+    when
+        //conditions
+    then
+        //actions
+
+end

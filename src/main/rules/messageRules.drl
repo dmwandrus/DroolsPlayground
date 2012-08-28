@@ -1,0 +1,35 @@
+//created on: Aug 28, 2012
+package com.sample
+
+//list any import classes here.
+import com.sample.dtos.MessageTypes;
+import com.sample.dtos.MessageRegistration;
+import com.sample.dtos.Message;
+
+
+//declare any global variables here
+
+
+
+
+rule "Added Message Audit"
+	salience 50
+    when
+        $msg : Message ( )
+    then
+        System.out.println("[audit] Message added: "+$msg);
+
+end
+
+rule "Send to app"
+    //include attributes such as "salience" here...
+    when
+        //conditions
+        $msg : Message ( $type : messageType )
+        $msgReg : MessageRegistration ( type == $type, $app : app )
+    then
+        //actions
+		$app.addMessage($msg);
+        System.out.println("Sending message ("+$msg.getId()+") of type: "+$type+" to app "+$app);
+
+end
