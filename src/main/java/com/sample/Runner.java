@@ -52,6 +52,11 @@ public class Runner {
 		String helloProcessName2 = "com.sample.bpmn.hello2";
 		wrapper.startProcess(helloProcessName2);
 		System.out.println("Done calling process");
+		
+		System.out.println("Calling hello3 process");
+		String helloProcessName3 = "com.sample.bpmn.hello3";
+		wrapper.startProcess(helloProcessName3);
+		System.out.println("Done calling process");
 	}
 	
 //	public static void createAndShowGUI() throws Exception

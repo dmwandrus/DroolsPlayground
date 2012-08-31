@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <process processType="Private" isExecutable="true" id="com.sample.bpmn.hello3" name="Hello World3" >
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess" />
+    <endEvent id="_3" name="EndProcess" >
+        <terminateEventDefinition/>
+    </endEvent>
+    <task id="_2_1" name="Sample Task" tns:taskName="SampleTask" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </task>
+    <task id="_2_2" name="Alt Sample Task" tns:taskName="AltSampleTask" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </task>
+    <parallelGateway id="_6" name="Gateway" gatewayDirection="Diverging" />
+    <parallelGateway id="_7" name="Gateway" gatewayDirection="Converging" />
+    <scriptTask id="_8" name="Script" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("Converged!");</script>
+    </scriptTask>
+    <scriptTask id="_9" name="Script" >
+      <script>System.out.println("Crazy Town!!");</script>
+    </scriptTask>
+
+    <!-- connections -->
+    <sequenceFlow id="_8-_3" sourceRef="_8" targetRef="_3" />
+    <sequenceFlow id="_6-_2_1" sourceRef="_6" targetRef="_2_1" />
+    <sequenceFlow id="_6-_2_2" sourceRef="_6" targetRef="_2_2" />
+    <sequenceFlow id="_1-_6" sourceRef="_1" targetRef="_6" />
+    <sequenceFlow id="_2_1-_7" sourceRef="_2_1" targetRef="_7" />
+    <sequenceFlow id="_2_2-_7" sourceRef="_2_2" targetRef="_7" />
+    <sequenceFlow id="_9-_7" sourceRef="_9" targetRef="_7" />
+    <sequenceFlow id="_7-_8" sourceRef="_7" targetRef="_8" />
+    <sequenceFlow id="_6-_9" sourceRef="_6" targetRef="_9" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.sample.bpmn.hello3" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="16" y="16" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="477" y="425" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2_1" >
+        <dc:Bounds x="205" y="63" width="232" height="58" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2_2" >
+        <dc:Bounds x="211" y="154" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" >
+        <dc:Bounds x="85" y="95" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="484" y="124" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" >
+        <dc:Bounds x="446" y="280" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_9" >
+        <dc:Bounds x="239" y="260" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_8-_3" >
+        <di:waypoint x="486" y="304" />
+        <di:waypoint x="501" y="449" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_2_1" >
+        <di:waypoint x="109" y="119" />
+        <di:waypoint x="321" y="92" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_2_2" >
+        <di:waypoint x="109" y="119" />
+        <di:waypoint x="261" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_1-_6" >
+        <di:waypoint x="40" y="40" />
+        <di:waypoint x="109" y="119" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2_1-_7" >
+        <di:waypoint x="321" y="92" />
+        <di:waypoint x="508" y="148" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2_2-_7" >
+        <di:waypoint x="261" y="178" />
+        <di:waypoint x="508" y="148" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_9-_7" >
+        <di:waypoint x="279" y="284" />
+        <di:waypoint x="508" y="148" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_8" >
+        <di:waypoint x="508" y="148" />
+        <di:waypoint x="486" y="304" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_9" >
+        <di:waypoint x="109" y="119" />
+        <di:waypoint x="279" y="284" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

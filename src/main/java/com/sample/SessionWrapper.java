@@ -92,6 +92,7 @@ public class SessionWrapper {
 		kbuilder.add(ResourceFactory.newClassPathResource("messageRules.drl"), ResourceType.DRL);
 		kbuilder.add(ResourceFactory.newClassPathResource("sample.bpmn"), ResourceType.BPMN2);
 		kbuilder.add(ResourceFactory.newClassPathResource("sample2.bpmn"), ResourceType.BPMN2);
+		kbuilder.add(ResourceFactory.newClassPathResource("sample3.bpmn"), ResourceType.BPMN2);
 
 		KnowledgeBuilderErrors errors = kbuilder.getErrors();
 		if (errors.size() > 0) {
