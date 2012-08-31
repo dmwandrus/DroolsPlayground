@@ -1,9 +1,16 @@
 package com.sample;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import com.sample.dtos.App;
 import com.sample.dtos.Message;
@@ -12,16 +19,66 @@ import com.sample.dtos.MessageTypes;
 public class Runner {
 	
 	public static Random random = new Random();
-	
+	public static SessionWrapper wrapper;
 	
 	public static void main(String[] args) throws Exception
 	{
 		System.out.println("Starting up....");
-		SessionWrapper wrapper = new SessionWrapper();
+		wrapper = new SessionWrapper();
 		wrapper.init();
 		
+		//addRulesInfo(wrapper);
+		
+		runProcess(wrapper);
+		
+//		System.out.println("Showing GUI");
+//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//            public void run() {
+//                try {
+//					createAndShowGUI();
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//            }
+//        });
+		
+		System.out.println("Shutting down....");
+	}
+	
+	public static void runProcess(SessionWrapper wrapper)
+	{
+		System.out.println("Calling hello2 process");
+		String helloProcessName2 = "com.sample.bpmn.hello2";
+		wrapper.startProcess(helloProcessName2);
+		System.out.println("Done calling process");
+	}
+	
+//	public static void createAndShowGUI() throws Exception
+//	{
+//		SessionWrapper wrapper = new SessionWrapper();
+//		wrapper.init();
+//		JFrame frame = new JFrame("ProcessDemo");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		
+//		JLabel emptyLabel = new JLabel("Try this out!");
+//        emptyLabel.setPreferredSize(new Dimension(175, 100));
+//        frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
+// 
+//        //Display the window.
+//        frame.pack();
+//        frame.setVisible(true);
+//        
+//        runProcess(wrapper);
+//        
+//	}
+	
+	
+	public static void addRulesInfo(SessionWrapper wrapper)
+	{
 		List<Object> objectsToAdd = new ArrayList<Object>();
-		for(int i=0; i<20; i++)
+		int j = 10;
+		for(int i=0; i<j; i++)
 		{
 			objectsToAdd.add(createMessage(i));
 		}
@@ -76,22 +133,19 @@ public class Runner {
 		wrapper.addAndExecute(objectsToAdd);
 		
 		
-		List<Object> objectsToAdd2 = new ArrayList<Object>();
-		for(int i=20; i<40; i++)
-		{
-			objectsToAdd2.add(createMessage(i));
-		}
-		wrapper.addAndExecute(objectsToAdd2);
-		
-		for(int i=40; i<60; i++)
-		{
-			wrapper.addAndExecute(createMessage(i));
-		}
-		
-		wrapper.destroy();
-		System.out.println("Shutting down....");
+//		List<Object> objectsToAdd2 = new ArrayList<Object>();
+//		for(int i=20; i<40; i++)
+//		{
+//			objectsToAdd2.add(createMessage(i));
+//		}
+//		wrapper.addAndExecute(objectsToAdd2);
+//		
+//		for(int i=40; i<60; i++)
+//		{
+//			wrapper.addAndExecute(createMessage(i));
+//		}
+
 	}
-	
 	
 	public static Message createMessage(int i)
 	{
